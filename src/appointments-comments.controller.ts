@@ -1,10 +1,28 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Transform } from 'class-transformer';
+import { IsNumber, IsString } from 'class-validator';
 
 import { GetCommentByAppointmentIdService } from './get-comment-by-appointment-id.service';
 import { CreateCommentService } from './create-comment.service';
+import { toNumber } from './app.transformer';
 
-export class CreateAppointmentsCommentsBodyDto {
-  text: string;
+import type { Appointment, Comment } from '@prisma/client';
+
+export class GetCommentsParams {
+  @IsNumber()
+  @Transform(toNumber)
+  id: Appointment['id'];
+}
+
+export class CreateCommentParams {
+  @IsNumber()
+  @Transform(toNumber)
+  id: Comment['id'];
+}
+
+export class CreateCommentDTO {
+  @IsString()
+  text: Comment['text'];
 }
 
 @Controller('appointments/:id/comments')
@@ -15,17 +33,19 @@ export class AppointmentsCommentsController {
   ) {}
 
   @Get()
-  index(@Param('id') id: string) {
-    return this.getCommentByAppointmentIdService.call({ appointmentId: +id });
+  getComments(@Param() params: GetCommentsParams) {
+    return this.getCommentByAppointmentIdService.call({
+      appointmentId: +params.id,
+    });
   }
 
   @Post()
-  create(
-    @Param('id') id: string,
-    @Body() body: CreateAppointmentsCommentsBodyDto,
+  createComment(
+    @Param() params: CreateCommentParams,
+    @Body() body: CreateCommentDTO,
   ) {
     return this.createCommentService.call({
-      appointmentId: +id,
+      appointmentId: +params.id,
       candidateId: 1,
       text: body.text,
     });
