@@ -77,15 +77,15 @@ model Comment {
   appointment   Appointment @relation(fields: [appointmentId], references: [id])
   appointmentId Int
 
-  comment_ownable_id   Int
-  comment_ownable_type CommentOwnableType
+  commentOwnableId   Int
+  commentOwnableType CommentOwnableType
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
 
-  Admin     Admin?     @relation("AdminComment", fields: [comment_ownable_id], references: [id], map: "admin_commentOwnableId")
-  Candidate Candidate? @relation("CandidateComment", fields: [comment_ownable_id], references: [id], map: "candidate_commentOwnableId")
+  Admin     Admin?     @relation("AdminComment", fields: [commentOwnableId], references: [id], map: "admin_commentOwnableId")
+  Candidate Candidate? @relation("CandidateComment", fields: [commentOwnableId], references: [id], map: "candidate_commentOwnableId")
 }
 
 enum CommentOwnableType {
