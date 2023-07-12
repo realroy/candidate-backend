@@ -1,0 +1,91 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id         Int       @id @default(autoincrement())
+  email      String    @unique
+  name       String?
+  profileUrl String?
+  comments   Comment[] @relation("AdminComment")
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  deletedAt  DateTime?
+}
+
+model Candidate {
+  id                    Int                    @id @default(autoincrement())
+  name                  String                 @unique
+  profileUrl            String?
+  candidateAppointments CandidateAppointment[]
+  comments              Comment[]              @relation("CandidateComment")
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  deletedAt             DateTime?
+}
+
+model Appointment {
+  id                    Int                    @id @default(autoincrement())
+  name                  String                 @unique
+  description           String?
+  status                AppointmentStatus      @default(TO_DO)
+  comments              Comment[]
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  deletedAt             DateTime?
+  candidateAppointments CandidateAppointment[]
+
+  @@index([status], name: "status")
+}
+
+enum AppointmentStatus {
+  TO_DO
+  IN_PROGRESS
+  DONE
+}
+
+model CandidateAppointment {
+  id            Int         @id @default(autoincrement())
+  candidate     Candidate   @relation(fields: [candidateId], references: [id])
+  candidateId   Int
+  appointment   Appointment @relation(fields: [appointmentId], references: [id])
+  appointmentId Int
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  deletedAt     DateTime?
+
+  @@unique([candidateId, appointmentId])
+  @@index([candidateId], name: "candidateId")
+  @@index([appointmentId], name: "appointmentId")
+}
+
+model Comment {
+  id   Int    @id @default(autoincrement())
+  text String
+
+  appointment   Appointment @relation(fields: [appointmentId], references: [id])
+  appointmentId Int
+
+  comment_ownable_id   Int
+  comment_ownable_type CommentOwnableType
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  Admin     Admin?     @relation("AdminComment", fields: [comment_ownable_id], references: [id], map: "admin_commentOwnableId")
+  Candidate Candidate? @relation("CandidateComment", fields: [comment_ownable_id], references: [id], map: "candidate_commentOwnableId")
+}
+
+enum CommentOwnableType {
+  ADMIN
+  CANDIDATE
+}
