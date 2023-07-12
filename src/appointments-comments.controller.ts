@@ -1,9 +1,19 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { Transform } from 'class-transformer';
 import { IsNumber, IsString } from 'class-validator';
 
 import { GetCommentByAppointmentIdService } from './get-comment-by-appointment-id.service';
-import { CreateCommentService } from './create-comment.service';
+import {
+  CreateCommentService,
+  UnsupportedCommentOwnerableError,
+} from './create-comment.service';
 import { toNumber } from './app.transformer';
 
 import type { Appointment, Comment } from '@prisma/client';
@@ -40,14 +50,24 @@ export class AppointmentsCommentsController {
   }
 
   @Post()
-  createComment(
+  async createComment(
     @Param() params: CreateCommentParams,
     @Body() body: CreateCommentDTO,
   ) {
-    return this.createCommentService.call({
-      appointmentId: +params.id,
-      candidateId: 1,
-      text: body.text,
-    });
+    const comment = await this.createCommentService
+      .call({
+        appointmentId: +params.id,
+        candidateId: 1,
+        text: body.text,
+      })
+      .catch((err) => {
+        if (err instanceof UnsupportedCommentOwnerableError) {
+          throw new BadRequestException(err.message);
+        }
+
+        throw err;
+      });
+
+    return comment;
   }
 }
