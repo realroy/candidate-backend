@@ -11,14 +11,15 @@ datasource db {
 }
 
 model Admin {
-  id         Int       @id @default(autoincrement())
-  email      String    @unique
-  name       String?
-  profileUrl String?
-  comments   Comment[] @relation("AdminComment")
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
-  deletedAt  DateTime?
+  id          Int           @id @default(autoincrement())
+  email       String        @unique
+  name        String?
+  profileUrl  String?
+  comments    Comment[]     @relation("AdminComment")
+  appointment Appointment[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  deletedAt   DateTime?
 }
 
 model Candidate {
@@ -38,6 +39,8 @@ model Appointment {
   description           String?
   status                AppointmentStatus      @default(TO_DO)
   comments              Comment[]
+  creator               Admin                  @relation(fields: [creatorId], references: [id])
+  creatorId             Int
   createdAt             DateTime               @default(now())
   updatedAt             DateTime               @updatedAt
   deletedAt             DateTime?
