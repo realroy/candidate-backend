@@ -3,16 +3,26 @@ import { Injectable } from '@nestjs/common';
 import { PrismaLib } from './prisma.lib';
 
 import type { Candidate } from '@prisma/client';
+import type { BaseService } from './base-service.interface';
 
-type GetAppointmentForCandidateServiceInput = {
+type Input = {
   candidateId: Candidate['id'];
+  limit: number;
+  cursor?: Candidate['id'];
 };
 
 @Injectable()
-export class GetAppointmentForCandidateService {
+export class GetAppointmentsForCandidateService implements BaseService {
   constructor(private readonly prisma: PrismaLib) {}
-  async call(input: GetAppointmentForCandidateServiceInput) {
+
+  async call(input: Input) {
     const appointments = await this.prisma.appointment.findMany({
+      ...(!!input.cursor && {
+        cursor: {
+          id: input.cursor,
+        },
+        skip: input.limit,
+      }),
       select: {
         id: true,
         name: true,
@@ -32,6 +42,7 @@ export class GetAppointmentForCandidateService {
         },
       },
       where: {
+        deletedAt: null,
         candidateAppointments: {
           every: {
             candidateId: {
