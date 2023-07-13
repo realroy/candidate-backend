@@ -1,5 +1,5 @@
-import { Controller, Get, Param, Patch, Query } from '@nestjs/common';
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { Body, Controller, Get, Param, Patch, Query } from '@nestjs/common';
+import { IsIn, IsNumber, IsOptional, IsString } from 'class-validator';
 import { Transform } from 'class-transformer';
 
 import { GetAppointmentsForCandidateService } from './get-appointments-for-candidate.service';
@@ -11,14 +11,17 @@ import { toNumber } from './app.transformer';
 import type { Appointment } from '@prisma/client';
 
 export class UpdateAppointmentDTO {
+  @IsOptional()
   @IsString()
-  name: Appointment['name'];
+  name?: Appointment['name'];
 
+  @IsOptional()
   @IsString()
-  description: Appointment['description'];
+  description?: Appointment['description'];
 
-  @IsString()
-  status: Appointment['status'];
+  @IsOptional()
+  @IsIn(['DONE', 'IN_PROGRESS', 'TO_DO'] as Appointment['status'][])
+  status?: Appointment['status'];
 }
 
 export class GetAppointmentsQuery {
@@ -73,7 +76,7 @@ export class AppointmentsController {
   @Patch(':id')
   updateAppointment(
     @Param() params: UpdateAppointmentParams,
-    body: UpdateAppointmentDTO,
+    @Body() body: UpdateAppointmentDTO,
   ) {
     return this.updateAppointmentByAdminService.call({
       appointment: {

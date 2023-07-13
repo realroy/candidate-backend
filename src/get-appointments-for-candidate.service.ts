@@ -22,7 +22,8 @@ export class GetAppointmentsForCandidateService implements BaseService {
         cursor: {
           id: input.cursor,
         },
-        skip: input.limit,
+        skip: 1,
+        take: input.limit,
       }),
       select: {
         id: true,
