@@ -6,6 +6,8 @@ export default defineConfig({
     include: ['**/*.e2e-spec.ts'],
     globals: true,
     root: './',
+    threads: false,
+    setupFiles: ['./src/tests/helpers/setup-prisma.ts'],
   },
   plugins: [swc.vite()],
 });
