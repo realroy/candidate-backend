@@ -39,8 +39,8 @@ model Appointment {
   description           String?
   status                AppointmentStatus      @default(TO_DO)
   comments              Comment[]
-  creator               Admin                  @relation(fields: [creatorId], references: [id])
-  creatorId             Int
+  creator               Admin?                 @relation(fields: [creatorId], references: [id], onDelete: SetNull)
+  creatorId             Int?
   createdAt             DateTime               @default(now())
   updatedAt             DateTime               @updatedAt
   deletedAt             DateTime?
@@ -56,13 +56,13 @@ enum AppointmentStatus {
 }
 
 model CandidateAppointment {
-  id            Int         @id @default(autoincrement())
-  candidate     Candidate   @relation(fields: [candidateId], references: [id])
-  candidateId   Int
-  appointment   Appointment @relation(fields: [appointmentId], references: [id])
-  appointmentId Int
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
+  id            Int          @id @default(autoincrement())
+  candidate     Candidate?   @relation(fields: [candidateId], references: [id], onDelete: SetNull)
+  candidateId   Int?
+  appointment   Appointment? @relation(fields: [appointmentId], references: [id], onDelete: SetNull)
+  appointmentId Int?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
   deletedAt     DateTime?
 
   @@unique([candidateId, appointmentId])
@@ -74,8 +74,8 @@ model Comment {
   id   Int    @id @default(autoincrement())
   text String
 
-  appointment   Appointment @relation(fields: [appointmentId], references: [id])
-  appointmentId Int
+  appointment   Appointment? @relation(fields: [appointmentId], references: [id], onDelete: SetNull)
+  appointmentId Int?
 
   commentOwnableId   Int
   commentOwnableType CommentOwnableType
