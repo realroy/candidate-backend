@@ -4,7 +4,7 @@ import request from 'supertest';
 
 import { AppModule } from './../src/app.module';
 import prisma from './../src/tests/helpers/prisma';
-import { Admin, Appointment, AppointmentStatus } from '@prisma/client';
+import type { Admin, AppointmentStatus } from '@prisma/client';
 
 describe('AppointmentsController (e2e)', () => {
   let app: INestApplication;
