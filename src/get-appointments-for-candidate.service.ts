@@ -17,6 +17,7 @@ export class GetAppointmentsForCandidateService implements BaseService {
 
   async call(input: Input) {
     const appointments = await this.prisma.appointment.findMany({
+      take: input.limit,
       ...(!!input.cursor && {
         cursor: {
           id: input.cursor,

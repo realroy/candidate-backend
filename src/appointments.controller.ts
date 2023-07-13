@@ -61,7 +61,10 @@ export class AppointmentsController {
   }
 
   @Get(':id')
-  getAppointment(@Param() params: GetAppointmentParams) {
+  getAppointment(
+    @Param()
+    params: GetAppointmentParams,
+  ) {
     return this.getAppointmentForCandidateService.call({
       appointmentId: params.id,
     });
