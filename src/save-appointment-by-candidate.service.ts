@@ -16,6 +16,19 @@ export class SaveAppointmentByCandidateService implements BaseService {
 
   async call(input: Input) {
     const candidateAppointment = await this.prisma.candidateAppointment.create({
+      select: {
+        id: true,
+        candidate: {
+          select: {
+            id: true,
+            name: true,
+            profileUrl: true,
+            createdAt: true,
+          },
+        },
+        createdAt: true,
+        updatedAt: true,
+      },
       data: {
         appointmentId: input.appointmentId,
         candidateId: input.candidateId,

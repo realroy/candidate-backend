@@ -68,7 +68,7 @@ describe('AppointmentsCommentsController (e2e)', () => {
           {
             appointmentId: appointment.id,
             commentOwnableId: admin.id,
-            commentOwnableType: 'ADMIN',
+            commentOwnableType: 'Admin',
             text: 'comment#2',
           },
         ],

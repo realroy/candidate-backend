@@ -21,17 +21,13 @@ export class GetAppointmentForCandidateService implements BaseService {
         description: true,
         status: true,
         createdAt: true,
-        comments: {
-          select: {
-            id: true,
-            text: true,
-            createdAt: true,
-          },
-        },
         creator: {
           select: {
+            id: true,
+            email: true,
             profileUrl: true,
             name: true,
+            createdAt: true,
           },
         },
       },

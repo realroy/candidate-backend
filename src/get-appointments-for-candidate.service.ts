@@ -22,7 +22,7 @@ export class GetAppointmentsForCandidateService implements BaseService {
         cursor: {
           id: input.cursor,
         },
-        skip: 1,
+        skip: 0,
         take: input.limit,
       }),
       select: {
@@ -31,17 +31,16 @@ export class GetAppointmentsForCandidateService implements BaseService {
         description: true,
         status: true,
         createdAt: true,
-        candidateAppointments: {
-          select: {
-            candidateId: true,
-          },
-        },
+        updatedAt: true,
         creator: {
           select: {
             profileUrl: true,
             name: true,
           },
         },
+      },
+      orderBy: {
+        id: 'desc',
       },
       where: {
         deletedAt: null,
@@ -57,6 +56,31 @@ export class GetAppointmentsForCandidateService implements BaseService {
       },
     });
 
-    return appointments;
+    const nextAppointment = await this.prisma.appointment.findMany({
+      select: {
+        id: true,
+      },
+      cursor: {
+        id: appointments.at(-1).id,
+      },
+      take: 2,
+      orderBy: {
+        id: 'desc',
+      },
+    });
+
+    if (nextAppointment.length === 1) {
+      return {
+        data: appointments,
+        hasNext: false,
+        cursor: null,
+      };
+    }
+
+    return {
+      data: appointments,
+      hasNext: true,
+      cursor: nextAppointment.at(1).id,
+    };
   }
 }
