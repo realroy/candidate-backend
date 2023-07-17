@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  ForbiddenException,
   Get,
   Param,
   Patch,
@@ -86,7 +87,7 @@ export class AppointmentsController {
       });
     }
 
-    throw new UnauthorizedException(
+    throw new ForbiddenException(
       'Only candidates and admins can get appointments',
     );
   }
@@ -108,7 +109,7 @@ export class AppointmentsController {
     @Body() body: UpdateAppointmentDTO,
   ) {
     if (currentUser.role !== 'ADMIN') {
-      throw new UnauthorizedException('Only admins can update appointments');
+      throw new ForbiddenException('Only admins can update appointments');
     }
 
     return this.updateAppointmentByAdminService.call({

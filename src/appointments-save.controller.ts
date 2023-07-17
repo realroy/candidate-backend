@@ -1,4 +1,4 @@
-import { BadRequestException, Controller, Param, Post } from '@nestjs/common';
+import { Controller, ForbiddenException, Param, Post } from '@nestjs/common';
 import { IsNumber } from 'class-validator';
 import { Transform } from 'class-transformer';
 
@@ -27,7 +27,7 @@ export class AppointmentsSaveController {
     @Param() params: CreateAppointmentSaveParams,
   ) {
     if (currentUser.role !== 'CANDIDATE') {
-      throw new BadRequestException('Only candidates can save appointments');
+      throw new ForbiddenException('Only candidates can save appointments');
     }
 
     return this.saveAppointmentByCandidateService.call({

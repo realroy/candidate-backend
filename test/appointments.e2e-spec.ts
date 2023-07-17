@@ -137,7 +137,7 @@ describe('AppointmentsController (e2e)', () => {
       });
     });
 
-    it('should response 401 when candidate update appointment', async () => {
+    it('should response 403 when candidate update appointment', async () => {
       const appointment = await prisma.appointment.findFirst();
 
       const { statusCode } = await request(app.getHttpServer())
@@ -145,7 +145,7 @@ describe('AppointmentsController (e2e)', () => {
         .set('Authorization', `Bearer ${candidate1}`)
         .send({ status: 'DONE' as AppointmentStatus });
 
-      expect(statusCode).toBe(401);
+      expect(statusCode).toBe(403);
     });
   });
 });

@@ -72,12 +72,12 @@ describe('AppointmentsSaveController (e2e)', () => {
       expect(statusCode).toBe(201);
     });
 
-    it('return 401 when admin save appointment', async () => {
+    it('return 403 when admin save appointment', async () => {
       const { statusCode } = await request(app.getHttpServer())
         .post(`/appointments/${appointment.id}/save`)
         .set('Authorization', `Bearer ${adminToken}`);
 
-      expect(statusCode).toBe(401);
+      expect(statusCode).toBe(403);
     });
   });
 });
