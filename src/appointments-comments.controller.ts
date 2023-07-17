@@ -3,6 +3,7 @@ import {
   Body,
   Controller,
   Get,
+  InternalServerErrorException,
   Param,
   Post,
 } from '@nestjs/common';
@@ -17,6 +18,8 @@ import {
 import { toNumber } from './app.transformer';
 
 import type { Appointment, Comment } from '@prisma/client';
+import { User } from './app.decorator';
+import { CurrentUser } from './app.type';
 
 export class GetCommentsParams {
   @IsNumber()
@@ -51,23 +54,29 @@ export class AppointmentsCommentsController {
 
   @Post()
   async createComment(
+    @User() currentUser: CurrentUser,
     @Param() params: CreateCommentParams,
     @Body() body: CreateCommentDTO,
   ) {
-    const comment = await this.createCommentService
-      .call({
-        appointmentId: +params.id,
-        candidateId: 1,
-        text: body.text,
-      })
-      .catch((err) => {
-        if (err instanceof UnsupportedCommentOwnerableError) {
-          throw new BadRequestException(err.message);
-        }
+    try {
+      const candidateId =
+        currentUser.role === 'CANDIDATE' ? currentUser.id : undefined;
+      const adminId = currentUser.role === 'ADMIN' ? currentUser.id : undefined;
 
-        throw err;
+      const comment = await this.createCommentService.call({
+        appointmentId: +params.id,
+        text: body.text,
+        candidateId,
+        adminId,
       });
 
-    return comment;
+      return comment;
+    } catch (error) {
+      if (error instanceof UnsupportedCommentOwnerableError) {
+        throw new BadRequestException(error.message);
+      }
+
+      throw new InternalServerErrorException(error.message);
+    }
   }
 }

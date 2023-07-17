@@ -1,4 +1,5 @@
 import { Module, ValidationPipe } from '@nestjs/common';
+import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 
 import { AppController } from './app.controller';
 import { AppointmentsCommentsController } from './appointments-comments.controller';
@@ -14,7 +15,8 @@ import { SaveAppointmentByCandidateService } from './save-appointment-by-candida
 import { GetCommentByAppointmentIdService } from './get-comment-by-appointment-id.service';
 import { GetAppointmentForCandidateService } from './get-appointment-for-candidate.service';
 import { UpdateAppointmentByAdminService } from './update-appointment-by-admin.service';
-import { APP_FILTER, APP_PIPE } from '@nestjs/core';
+import { GetAppointmentsForAdminService } from './get-appointments-for-admin';
+
 import { PrismaExceptionFilter } from './prisma-exception.filter';
 
 @Module({
@@ -37,6 +39,7 @@ import { PrismaExceptionFilter } from './prisma-exception.filter';
     AppService,
     CreateCommentService,
     GetAppointmentForCandidateService,
+    GetAppointmentsForAdminService,
     GetAppointmentsForCandidateService,
     GetCommentByAppointmentIdService,
     PrismaLib,
