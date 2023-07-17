@@ -10,7 +10,7 @@ import {
 import { IsIn, IsNumber, IsOptional, IsString } from 'class-validator';
 import { Transform } from 'class-transformer';
 
-import { GetAppointmentsForAdminService } from './get-appointments-for-admin';
+import { GetAppointmentsForAdminService } from './get-appointments-for-admin.service';
 import { GetAppointmentsForCandidateService } from './get-appointments-for-candidate.service';
 import { GetAppointmentForCandidateService } from './get-appointment-for-candidate.service';
 import { UpdateAppointmentByAdminService } from './update-appointment-by-admin.service';

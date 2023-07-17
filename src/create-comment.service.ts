@@ -28,17 +28,27 @@ export class CreateCommentService implements BaseService {
   constructor(private readonly prisma: PrismaLib) {}
 
   async call(input: Input) {
-    const isCreatedByAdmin = 'adminId' in input;
-    const isCreatedByCandidate = 'candidateId' in input;
+    const isCreatedByAdmin = !!input?.['adminId'];
+    const isCreatedByCandidate = !!input?.['candidateId'];
 
     if (!isCreatedByAdmin && !isCreatedByCandidate) {
       throw new UnsupportedCommentOwnerableError();
     }
 
     const comments = await this.prisma.comment.create({
+      select: {
+        id: true,
+        text: true,
+        createdAt: true,
+        updatedAt: true,
+        commentOwnableId: true,
+        commentOwnableType: true,
+      },
       data: {
         appointmentId: input.appointmentId,
-        commentOwnableId: isCreatedByAdmin ? input.adminId : input.candidateId,
+        commentOwnableId: isCreatedByAdmin
+          ? input?.['adminId']
+          : input?.['candidateId'],
         commentOwnableType: isCreatedByAdmin ? 'Admin' : 'Candidate',
         text: input.text,
       },

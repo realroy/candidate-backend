@@ -14,9 +14,9 @@ function main() {
       );
     }
 
-    if (!['ADMIN', 'Candidate'].includes(role)) {
+    if (!['Admin', 'Candidate'].includes(role)) {
       throw new Error(
-        'Unsupported role (ADMIN, CADIDATE)! For example node ./scripts/generate-token-for-candidate-or-admin.mjs 911 ADMIN',
+        'Unsupported role (Admin, Candidate)! For example node ./scripts/generate-token-for-candidate-or-admin.mjs 911 ADMIN',
       );
     }
 

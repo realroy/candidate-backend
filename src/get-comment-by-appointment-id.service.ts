@@ -15,8 +15,17 @@ export class GetCommentByAppointmentIdService implements BaseService {
 
   async call(input: Input) {
     const comments = await this.prisma.comment.findMany({
+      select: {
+        id: true,
+        text: true,
+        createdAt: true,
+        updatedAt: true,
+        commentOwnableId: true,
+        commentOwnableType: true,
+      },
       where: {
         appointmentId: input.appointmentId,
+        deletedAt: null,
       },
       orderBy: {
         createdAt: 'desc',

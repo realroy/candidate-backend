@@ -7,7 +7,7 @@ export function generateToken(currentUser: CurrentUser) {
     { sub: +currentUser.id, role: currentUser.role },
     process.env.JWT_SECRET,
     {
-      expiresIn: '15m',
+      expiresIn: '1d',
     },
   );
 

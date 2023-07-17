@@ -15,6 +15,8 @@ import {
   CreateCommentService,
   UnsupportedCommentOwnerableError,
 } from './create-comment.service';
+import { GetCommentOwnableService } from './get-comment-ownable.service';
+
 import { toNumber } from './app.transformer';
 
 import type { Appointment, Comment } from '@prisma/client';
@@ -43,13 +45,36 @@ export class AppointmentsCommentsController {
   constructor(
     private readonly createCommentService: CreateCommentService,
     private readonly getCommentByAppointmentIdService: GetCommentByAppointmentIdService,
+    private readonly getCommentOwnableService: GetCommentOwnableService,
   ) {}
 
   @Get()
-  getComments(@Param() params: GetCommentsParams) {
-    return this.getCommentByAppointmentIdService.call({
+  async getComments(@Param() params: GetCommentsParams) {
+    const comments = await this.getCommentByAppointmentIdService.call({
       appointmentId: +params.id,
     });
+
+    const responses = [];
+
+    for (let i = 0; i < comments.length; i++) {
+      const { commentOwnableId, commentOwnableType, ...comment } = comments[i];
+
+      if (!commentOwnableId || !commentOwnableType) {
+        continue;
+      }
+
+      const commentOwnable = await this.getCommentOwnableService.call({
+        id: commentOwnableId,
+        type: commentOwnableType,
+      });
+
+      responses.push({
+        ...comment,
+        commentOwnable,
+      });
+    }
+
+    return responses;
   }
 
   @Post()
@@ -63,14 +88,23 @@ export class AppointmentsCommentsController {
         currentUser.role === 'Candidate' ? currentUser.id : undefined;
       const adminId = currentUser.role === 'Admin' ? currentUser.id : undefined;
 
-      const comment = await this.createCommentService.call({
-        appointmentId: +params.id,
-        text: body.text,
-        candidateId,
-        adminId,
+      const { commentOwnableId, commentOwnableType, ...comment } =
+        await this.createCommentService.call({
+          appointmentId: +params.id,
+          text: body.text,
+          candidateId,
+          adminId,
+        });
+
+      const commentOwnable = await this.getCommentOwnableService.call({
+        id: commentOwnableId,
+        type: commentOwnableType,
       });
 
-      return comment;
+      return {
+        ...comment,
+        commentOwnable,
+      };
     } catch (error) {
       if (error instanceof UnsupportedCommentOwnerableError) {
         throw new BadRequestException(error.message);

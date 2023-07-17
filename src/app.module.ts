@@ -15,7 +15,8 @@ import { SaveAppointmentByCandidateService } from './save-appointment-by-candida
 import { GetCommentByAppointmentIdService } from './get-comment-by-appointment-id.service';
 import { GetAppointmentForCandidateService } from './get-appointment-for-candidate.service';
 import { UpdateAppointmentByAdminService } from './update-appointment-by-admin.service';
-import { GetAppointmentsForAdminService } from './get-appointments-for-admin';
+import { GetAppointmentsForAdminService } from './get-appointments-for-admin.service';
+import { GetCommentOwnableService } from './get-comment-ownable.service';
 
 import { PrismaExceptionFilter } from './prisma-exception.filter';
 
@@ -42,6 +43,7 @@ import { PrismaExceptionFilter } from './prisma-exception.filter';
     GetAppointmentsForAdminService,
     GetAppointmentsForCandidateService,
     GetCommentByAppointmentIdService,
+    GetCommentOwnableService,
     PrismaLib,
     SaveAppointmentByCandidateService,
     UpdateAppointmentByAdminService,
