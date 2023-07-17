@@ -38,12 +38,6 @@ describe('AppointmentsCommentsController (e2e)', () => {
           name: 'candidate1',
         },
       }),
-      prisma.appointment.create({
-        data: {
-          name: 'Appoitment#1',
-          creatorId: admin.id,
-        },
-      }),
     ]);
 
     admin = responses[0];
@@ -52,7 +46,12 @@ describe('AppointmentsCommentsController (e2e)', () => {
     candidate1 = responses[1];
     candidate1Token = generateToken({ id: candidate1.id, role: 'Candidate' });
 
-    appointment = responses[2];
+    appointment = await prisma.appointment.create({
+      data: {
+        name: 'Appoitment#1',
+        creatorId: admin.id,
+      },
+    });
   });
 
   describe('/appointments/:id/comments (GET)', async () => {
@@ -87,7 +86,10 @@ describe('AppointmentsCommentsController (e2e)', () => {
     it('return 201 when comment created by candidate', async () => {
       const { statusCode } = await request(app.getHttpServer())
         .post(`/appointments/${appointment.id}/comments`)
-        .set('Authorization', `Bearer ${candidate1Token}`);
+        .set('Authorization', `Bearer ${candidate1Token}`)
+        .send({
+          text: 'Comment#1',
+        });
 
       expect(statusCode).toBe(201);
     });
@@ -95,7 +97,8 @@ describe('AppointmentsCommentsController (e2e)', () => {
     it('return 201 when comment created by admin', async () => {
       const { statusCode } = await request(app.getHttpServer())
         .post(`/appointments/${appointment.id}/comments`)
-        .set('Authorization', `Bearer ${adminToken}`);
+        .set('Authorization', `Bearer ${adminToken}`)
+        .send({ text: 'Comment#1' });
 
       expect(statusCode).toBe(201);
     });

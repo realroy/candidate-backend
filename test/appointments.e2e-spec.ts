@@ -69,7 +69,7 @@ describe('AppointmentsController (e2e)', () => {
         .set('Authorization', `Bearer ${candidate1Token}`);
 
       expect(statusCode).toBe(200);
-      expect(body).toHaveLength(10);
+      expect(body.data).toHaveLength(10);
     });
 
     it('should response with 200 status and exact appoitments size when receive cursor', async () => {
@@ -77,14 +77,14 @@ describe('AppointmentsController (e2e)', () => {
         .get('/appointments?limit=19')
         .set('Authorization', `Bearer ${candidate1Token}`);
 
-      const lastAppointment = firstResponse.body.at(-1);
+      const cursor = firstResponse.body.cursor;
 
-      const { statusCode, body } = await request(app.getHttpServer()).get(
-        `/appointments?limit=10&cursor=${lastAppointment.id}`,
-      );
+      const { statusCode, body } = await request(app.getHttpServer())
+        .get(`/appointments?limit=10&cursor=${cursor}`)
+        .set('Authorization', `Bearer ${candidate1Token}`);
 
       expect(statusCode).toBe(200);
-      expect(body).toHaveLength(1);
+      expect(body.data).toHaveLength(1);
     });
   });
 
@@ -142,7 +142,7 @@ describe('AppointmentsController (e2e)', () => {
 
       const { statusCode } = await request(app.getHttpServer())
         .patch(`/appointments/${appointment.id}`)
-        .set('Authorization', `Bearer ${candidate1}`)
+        .set('Authorization', `Bearer ${candidate1Token}`)
         .send({ status: 'DONE' as AppointmentStatus });
 
       expect(statusCode).toBe(403);

@@ -16,15 +16,19 @@ export const User = createParamDecorator(
       throw new UnauthorizedException('access token must be provided');
     }
 
-    const verifiedJwt = jwt.verify(jwtToken, process.env.JWT_SECRET);
+    try {
+      const verifiedJwt = jwt.verify(jwtToken, process.env.JWT_SECRET);
 
-    if (!verifiedJwt || !verifiedJwt['role']) {
-      return null;
+      if (!verifiedJwt || !verifiedJwt['role']) {
+        return null;
+      }
+
+      return {
+        id: verifiedJwt.sub,
+        role: verifiedJwt['role'],
+      };
+    } catch (error) {
+      throw new UnauthorizedException(error.message);
     }
-
-    return {
-      id: verifiedJwt.sub,
-      role: verifiedJwt['role'],
-    };
   },
 );

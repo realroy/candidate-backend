@@ -38,12 +38,6 @@ describe('AppointmentsSaveController (e2e)', () => {
           name: 'candidate1',
         },
       }),
-      prisma.appointment.create({
-        data: {
-          name: 'Appoitment#1',
-          creatorId: admin.id,
-        },
-      }),
     ]);
 
     admin = responses[0];
@@ -52,7 +46,12 @@ describe('AppointmentsSaveController (e2e)', () => {
     candidate1 = responses[1];
     candidate1Token = generateToken({ id: candidate1.id, role: 'Candidate' });
 
-    appointment = responses[2];
+    appointment = await prisma.appointment.create({
+      data: {
+        name: 'Appoitment#1',
+        creatorId: admin.id,
+      },
+    });
   });
 
   describe('/appointments/:id/save (POST)', async () => {

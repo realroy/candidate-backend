@@ -15,6 +15,15 @@ export class SaveAppointmentByCandidateService implements BaseService {
   constructor(private readonly prisma: PrismaLib) {}
 
   async call(input: Input) {
+    await this.prisma.appointment.findFirstOrThrow({
+      select: {
+        id: true,
+      },
+      where: {
+        id: input.appointmentId,
+      },
+    });
+
     const candidateAppointment = await this.prisma.candidateAppointment.create({
       select: {
         id: true,
