@@ -1,0 +1,712 @@
+{
+	"info": {
+		"_postman_id": "dc6ffa43-55b3-4198-9565-3fe36031cc13",
+		"name": "Candidate-Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14223479"
+	},
+	"item": [
+		{
+			"name": "Appointment List",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsInJvbGUiOiJDYW5kaWRhdGUiLCJpYXQiOjE2ODk1ODM4MjQsImV4cCI6MTY4OTU4NDcyNH0.jTtuoPnIsl3SBaZJGo8eZseNM7miYyhgbplGuzy00hI",
+						"description": "Token",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/appointments?limit=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"appointments"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10",
+							"description": "Appointment Limit"
+						},
+						{
+							"key": "cursor",
+							"value": "31",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsInJvbGUiOiJDYW5kaWRhdGUiLCJpYXQiOjE2ODk1ODM4MjQsImV4cCI6MTY4OTU4NDcyNH0.jTtuoPnIsl3SBaZJGo8eZseNM7miYyhgbplGuzy00hI",
+								"description": "Token",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/appointments?limit=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"appointments"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "3",
+									"description": "Appointment Limit"
+								},
+								{
+									"key": "cursor",
+									"value": "36",
+									"description": "Use appointment id as  initial point ",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2105"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"839-lm7FS0cl+I+kFYpHlMcL3wCCu78\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 17 Jul 2023 09:51:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"id\": 36,\n            \"name\": \"นัดสัมภาษณ์งาน #14\",\n            \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\",\n            \"status\": \"TO_DO\",\n            \"createdAt\": \"2023-07-17T08:17:55.374Z\",\n            \"updatedAt\": \"2023-07-17T08:17:55.374Z\",\n            \"creator\": {\n                \"profileUrl\": null,\n                \"name\": \"โรบินฮู้ด\"\n            }\n        },\n        {\n            \"id\": 35,\n            \"name\": \"นัดสัมภาษณ์งาน #6\",\n            \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\",\n            \"status\": \"TO_DO\",\n            \"createdAt\": \"2023-07-17T08:17:55.374Z\",\n            \"updatedAt\": \"2023-07-17T08:17:55.374Z\",\n            \"creator\": {\n                \"profileUrl\": null,\n                \"name\": \"โรบินฮู้ด\"\n            }\n        },\n        {\n            \"id\": 34,\n            \"name\": \"นัดสัมภาษณ์งาน #3\",\n            \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\",\n            \"status\": \"TO_DO\",\n            \"createdAt\": \"2023-07-17T08:17:55.374Z\",\n            \"updatedAt\": \"2023-07-17T08:17:55.374Z\",\n            \"creator\": {\n                \"profileUrl\": null,\n                \"name\": \"โรบินฮู้ด\"\n            }\n        }\n    ],\n    \"hasNext\": true,\n    \"cursor\": 33\n}"
+				}
+			]
+		},
+		{
+			"name": "Appointment Detail",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsInJvbGUiOiJDYW5kaWRhdGUiLCJpYXQiOjE2ODk1ODM4MjQsImV4cCI6MTY4OTU4NDcyNH0.jTtuoPnIsl3SBaZJGo8eZseNM7miYyhgbplGuzy00hI",
+						"description": "Token",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/appointments/33",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"appointments",
+						"33"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "404",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsInJvbGUiOiJDYW5kaWRhdGUiLCJpYXQiOjE2ODk1ODM4MjQsImV4cCI6MTY4OTU4NDcyNH0.jTtuoPnIsl3SBaZJGo8eZseNM7miYyhgbplGuzy00hI",
+								"description": "Token",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/appointments/-1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"appointments",
+								"-1"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "40"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"28-oR73Vb/YPfDbgDgtA//MdHJasVY\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 17 Jul 2023 08:53:42 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"Not Found\"\n}"
+				},
+				{
+					"name": "200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsInJvbGUiOiJDYW5kaWRhdGUiLCJpYXQiOjE2ODk1ODM4MjQsImV4cCI6MTY4OTU4NDcyNH0.jTtuoPnIsl3SBaZJGo8eZseNM7miYyhgbplGuzy00hI",
+								"description": "Token",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/appointments/33",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"appointments",
+								"33"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "728"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2d8-Lp8xdeVYYIZMauq3DBxWEZE87Fg\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 17 Jul 2023 09:33:31 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 33,\n    \"name\": \"นัดสัมภาษณ์งาน #10\",\n    \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\",\n    \"status\": \"TO_DO\",\n    \"createdAt\": \"2023-07-17T08:17:55.374Z\",\n    \"creator\": {\n        \"id\": 2,\n        \"email\": \"user1@robinhood.co.th\",\n        \"profileUrl\": null,\n        \"name\": \"โรบินฮู้ด\",\n        \"createdAt\": \"2023-07-17T08:17:55.361Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Appointment Save",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/appointments/33/save",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"appointments",
+						"33",
+						"save"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "201",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/appointments/33/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"appointments",
+								"33",
+								"save"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "192"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"c0-JGQGGyKceDfQpZDnaLPdBV2NT7o\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 17 Jul 2023 09:37:51 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 7,\n    \"candidate\": {\n        \"id\": 3,\n        \"name\": \"แบทแมน\",\n        \"profileUrl\": null,\n        \"createdAt\": \"2023-07-17T08:17:55.373Z\"\n    },\n    \"createdAt\": \"2023-07-17T09:37:51.231Z\",\n    \"updatedAt\": \"2023-07-17T09:37:51.231Z\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Appointment Comment List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/appointments/22/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"appointments",
+						"22",
+						"comments"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/appointments/22/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"appointments",
+								"22",
+								"comments"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1824"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"720-MB6cgrm9bjsI7yo8CO6R5NyuNW8\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 17 Jul 2023 09:27:46 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 103,\n        \"text\": \"This is a life\",\n        \"createdAt\": \"2023-07-17T09:22:46.786Z\",\n        \"updatedAt\": \"2023-07-17T09:22:46.786Z\",\n        \"commentOwnable\": {\n            \"id\": 3,\n            \"name\": \"แบทแมน\",\n            \"profileUrl\": null,\n            \"createdAt\": \"2023-07-17T08:17:55.373Z\",\n            \"updatedAt\": \"2023-07-17T08:17:55.373Z\"\n        }\n    },\n    {\n        \"id\": 102,\n        \"text\": \"This is a life\",\n        \"createdAt\": \"2023-07-17T09:22:35.009Z\",\n        \"updatedAt\": \"2023-07-17T09:22:35.009Z\",\n        \"commentOwnable\": {\n            \"id\": 3,\n            \"name\": \"แบทแมน\",\n            \"profileUrl\": null,\n            \"createdAt\": \"2023-07-17T08:17:55.373Z\",\n            \"updatedAt\": \"2023-07-17T08:17:55.373Z\"\n        }\n    },\n    {\n        \"id\": 101,\n        \"text\": \"This is a life\",\n        \"createdAt\": \"2023-07-17T09:19:02.666Z\",\n        \"updatedAt\": \"2023-07-17T09:19:02.666Z\",\n        \"commentOwnable\": {\n            \"id\": 3,\n            \"name\": \"แบทแมน\",\n            \"profileUrl\": null,\n            \"createdAt\": \"2023-07-17T08:17:55.373Z\",\n            \"updatedAt\": \"2023-07-17T08:17:55.373Z\"\n        }\n    },\n    {\n        \"id\": 100,\n        \"text\": \"This is a life\",\n        \"createdAt\": \"2023-07-17T09:04:18.263Z\",\n        \"updatedAt\": \"2023-07-17T09:04:18.263Z\",\n        \"commentOwnable\": {\n            \"id\": 3,\n            \"name\": \"แบทแมน\",\n            \"profileUrl\": null,\n            \"createdAt\": \"2023-07-17T08:17:55.373Z\",\n            \"updatedAt\": \"2023-07-17T08:17:55.373Z\"\n        }\n    },\n    {\n        \"id\": 32,\n        \"text\": \"ment #1\",\n        \"createdAt\": \"2023-07-17T08:38:28.542Z\",\n        \"updatedAt\": \"2023-07-17T08:38:28.542Z\",\n        \"commentOwnable\": {\n            \"id\": 3,\n            \"name\": \"แบทแมน\",\n            \"profileUrl\": null,\n            \"createdAt\": \"2023-07-17T08:17:55.373Z\",\n            \"updatedAt\": \"2023-07-17T08:17:55.373Z\"\n        }\n    },\n    {\n        \"id\": 34,\n        \"text\": \"ment #3\",\n        \"createdAt\": \"2023-07-17T08:38:28.542Z\",\n        \"updatedAt\": \"2023-07-17T08:38:28.542Z\",\n        \"commentOwnable\": {\n            \"id\": 3,\n            \"name\": \"แบทแมน\",\n            \"profileUrl\": null,\n            \"createdAt\": \"2023-07-17T08:17:55.373Z\",\n            \"updatedAt\": \"2023-07-17T08:17:55.373Z\"\n        }\n    },\n    {\n        \"id\": 33,\n        \"text\": \"ment #2\",\n        \"createdAt\": \"2023-07-17T08:38:28.542Z\",\n        \"updatedAt\": \"2023-07-17T08:38:28.542Z\",\n        \"commentOwnable\": {\n            \"id\": 4,\n            \"name\": \"แคทวูแมน\",\n            \"profileUrl\": null,\n            \"createdAt\": \"2023-07-17T08:17:55.373Z\",\n            \"updatedAt\": \"2023-07-17T08:17:55.373Z\"\n        }\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Create Appointment Comment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"text\": \"This is a life\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/appointments/22/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"appointments",
+						"22",
+						"comments"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "201",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"This is a life\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/appointments/22/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"appointments",
+								"22",
+								"comments"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "262"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"106-KAacsZnKnRawNyE5RHtKUrNJB5w\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 17 Jul 2023 09:27:59 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 104,\n    \"text\": \"This is a life\",\n    \"createdAt\": \"2023-07-17T09:27:59.350Z\",\n    \"updatedAt\": \"2023-07-17T09:27:59.350Z\",\n    \"commentOwnable\": {\n        \"id\": 3,\n        \"name\": \"แบทแมน\",\n        \"profileUrl\": null,\n        \"createdAt\": \"2023-07-17T08:17:55.373Z\",\n        \"updatedAt\": \"2023-07-17T08:17:55.373Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Update Appointment",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"DONE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/appointments/33",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"appointments",
+						"33"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"DONE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/appointments/33",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"appointments",
+								"33"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "652"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"28c-AzXddt3k7Rk3VHYiw8ONDcsG38Q\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 17 Jul 2023 09:40:18 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 33,\n    \"name\": \"นัดสัมภาษณ์งาน #10\",\n    \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\",\n    \"status\": \"DONE\",\n    \"creatorId\": 2,\n    \"createdAt\": \"2023-07-17T08:17:55.374Z\",\n    \"updatedAt\": \"2023-07-17T09:40:18.593Z\",\n    \"deletedAt\": null\n}"
+				},
+				{
+					"name": "403",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"DONE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/appointments/33",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"appointments",
+								"33"
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "86"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"56-PmeU3K0f3H9PeTuWzfhPZZhBlFY\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 17 Jul 2023 09:53:21 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Only admins can update appointments\",\n    \"error\": \"Forbidden\",\n    \"statusCode\": 403\n}"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsInJvbGUiOiJDYW5kaWRhdGUiLCJpYXQiOjE2ODk1ODY2MjgsImV4cCI6MTY4OTY3MzAyOH0.6dbehwlsuQIkjJe_RyiKFBk-Toh2qlp_za3E7mCCyQE",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
