@@ -44,13 +44,13 @@ describe('AppointmentsController (e2e)', () => {
     admin = responses[0];
     adminToken = generateToken({
       id: admin.id,
-      role: 'ADMIN',
+      role: 'Admin',
     });
 
     candidate1 = responses[1];
     candidate1Token = generateToken({
       id: candidate1.id,
-      role: 'CANDIDATE',
+      role: 'Candidate',
     });
 
     await prisma.appointment.createMany({

@@ -47,10 +47,10 @@ describe('AppointmentsSaveController (e2e)', () => {
     ]);
 
     admin = responses[0];
-    adminToken = generateToken({ id: admin.id, role: 'ADMIN' });
+    adminToken = generateToken({ id: admin.id, role: 'Admin' });
 
     candidate1 = responses[1];
-    candidate1Token = generateToken({ id: candidate1.id, role: 'CANDIDATE' });
+    candidate1Token = generateToken({ id: candidate1.id, role: 'Candidate' });
 
     appointment = responses[2];
   });

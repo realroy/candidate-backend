@@ -26,7 +26,7 @@ export class AppointmentsSaveController {
     @User() currentUser: CurrentUser,
     @Param() params: CreateAppointmentSaveParams,
   ) {
-    if (currentUser.role !== 'CANDIDATE') {
+    if (currentUser.role !== 'Candidate') {
       throw new ForbiddenException('Only candidates can save appointments');
     }
 

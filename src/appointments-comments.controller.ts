@@ -60,8 +60,8 @@ export class AppointmentsCommentsController {
   ) {
     try {
       const candidateId =
-        currentUser.role === 'CANDIDATE' ? currentUser.id : undefined;
-      const adminId = currentUser.role === 'ADMIN' ? currentUser.id : undefined;
+        currentUser.role === 'Candidate' ? currentUser.id : undefined;
+      const adminId = currentUser.role === 'Admin' ? currentUser.id : undefined;
 
       const comment = await this.createCommentService.call({
         appointmentId: +params.id,

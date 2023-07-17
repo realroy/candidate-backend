@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { PrismaLib } from './prisma.lib';
 
-import type { Admin, Appointment, Candidate } from '@prisma/client';
+import type { Admin, Appointment, Candidate, Comment } from '@prisma/client';
 import type { BaseService } from './base-service.interface';
 
 export class UnsupportedCommentOwnerableError extends Error {
@@ -15,12 +15,12 @@ type Input =
   | {
       appointmentId: Appointment['id'];
       adminId: Admin['id'];
-      text: string;
+      text: Comment['text'];
     }
   | {
       appointmentId: Appointment['id'];
       candidateId: Candidate['id'];
-      text: string;
+      text: Comment['text'];
     };
 
 @Injectable()
@@ -39,7 +39,7 @@ export class CreateCommentService implements BaseService {
       data: {
         appointmentId: input.appointmentId,
         commentOwnableId: isCreatedByAdmin ? input.adminId : input.candidateId,
-        commentOwnableType: isCreatedByAdmin ? 'ADMIN' : 'CANDIDATE',
+        commentOwnableType: isCreatedByAdmin ? 'Admin' : 'Candidate',
         text: input.text,
       },
     });

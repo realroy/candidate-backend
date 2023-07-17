@@ -1,4 +1,4 @@
 export type CurrentUser = {
   id: number;
-  role: 'ADMIN' | 'CANDIDATE';
+  role: 'Admin' | 'Candidate';
 };

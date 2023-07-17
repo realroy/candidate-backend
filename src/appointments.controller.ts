@@ -6,7 +6,6 @@ import {
   Param,
   Patch,
   Query,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { IsIn, IsNumber, IsOptional, IsString } from 'class-validator';
 import { Transform } from 'class-transformer';
@@ -73,14 +72,14 @@ export class AppointmentsController {
     @User() currentUser: CurrentUser,
     @Query() query: GetAppointmentsQuery,
   ) {
-    if (currentUser.role === 'CANDIDATE') {
+    if (currentUser.role === 'Candidate') {
       return this.getAppointmentsForCandidateService.call({
         candidateId: currentUser.id,
         ...query,
       });
     }
 
-    if (currentUser.role === 'ADMIN') {
+    if (currentUser.role === 'Admin') {
       return this.getAppointmentsForAdminService.call({
         adminId: currentUser.id,
         ...query,
@@ -108,7 +107,7 @@ export class AppointmentsController {
     @Param() params: UpdateAppointmentParams,
     @Body() body: UpdateAppointmentDTO,
   ) {
-    if (currentUser.role !== 'ADMIN') {
+    if (currentUser.role !== 'Admin') {
       throw new ForbiddenException('Only admins can update appointments');
     }
 
